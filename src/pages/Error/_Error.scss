@@ -1,0 +1,13 @@
+.ErrorPage {
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  position: absolute;
+  z-index: 30;
+  inset: 0;
+}

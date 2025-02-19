@@ -1,0 +1,20 @@
+//Адаптивное свойство
+@mixin adaptivMagic($property, $startSize, $minSize, $mode\(\)){
+  $addSize: $startSize - $minSize;
+  @if $mode\(\)=="mode\(1\)" {
+    //Если меньше контейнера
+    #{$property}: $startSize + px;
+    @media (max-width: #{$widthContainer + px}) {
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$widthContainer - 320}));
+    }
+  } @else if $mode\(\)=="mode\(2\)" {
+    //Если больше контейнера
+    #{$property}: $startSize + px;
+      @media (min-width: #{$widthContainer + px}) {
+        #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$widthContainer - 320}));
+      }
+  } @else {
+    //Всегда
+    #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$siteWidth - 320}));
+  }
+}
