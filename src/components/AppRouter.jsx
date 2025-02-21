@@ -19,7 +19,7 @@ const AppRouter = () => {
             <Route path="admin" element={<AdminPage />} />
             <Route path="login" element={<LoginPage />} />
           </Route>
-        <Route path="*" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
