@@ -21,3 +21,6 @@ client/build
 /client/npm-debug.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
+
+/AuthorizationService/go.mod
+/AuthorizationService/go.sum

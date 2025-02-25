@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .profile-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .profile-container h2 {
+      margin-bottom: 20px;
+    }
+    .profile-container label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    .logout-button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .logout-button:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h2>Профиль пользователя</h2>
+    <label id="UserName">Имя пользователя: Загрузка...</label>
+    <label id="Email">Email: Загрузка...</label>
+    <button class="logout-button" id="logoutButton">Выйти</button>
+  </div>
+
+  <script>
+    // Функция для загрузки данных профиля
+    async function loadProfile() {
+      const token = localStorage.getItem('jwt'); // Получаем JWT из localStorage
+
+      if (!token) {
+        alert('Токен отсутствует. Пожалуйста, войдите в систему.');
+        window.location.href = '/login.html'; // Перенаправляем на страницу входа
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost/api/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`, // Добавляем токен в заголовок
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json(); // Парсим JSON-ответ
+          document.getElementById('UserName').textContent = `Имя пользователя: ${data.username}`;
+          document.getElementById('Email').textContent = `Email: ${data.email}`;
+        } else {
+          console.error('Ошибка:', response.status, response.statusText);
+          alert('Не удалось загрузить данные профиля.');
+        }
+      } catch (error) {
+        console.error('Ошибка при выполнении запроса:', error);
+        alert('Произошла ошибка при загрузке данных.');
+      }
+    }
+
+    // Функция для выхода из системы
+    document.getElementById('logoutButton').addEventListener('click', () => {
+      localStorage.removeItem('jwt'); // Удаляем токен из localStorage
+      window.location.href = '/login.html'; // Перенаправляем на страницу входа
+    });
+
+    // Загружаем профиль при загрузке страницы
+    window.onload = loadProfile;
+  </script>
+</body>
+</html>
