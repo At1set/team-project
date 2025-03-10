@@ -1,1 +1,101 @@
 @use "../../components/LoginForm/LoginForm.scss";
+@use "../../styles/variables.scss" as *;
+
+
+.LoginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+}
+
+.loginForm {
+
+  & {
+    width: 100%;
+    max-width: 700px;
+    padding: 35px 50px;
+    background-color: $authorizationBg;
+    border-radius: 20px;
+  }
+
+  // .loginForm__title
+  &__title {
+    margin-bottom: 110px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  // .loginForm__input
+  &__input {
+
+
+    label {
+      display: block;
+      font-size: 20px;
+      color: #7C838A;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      height: 65px;
+      background-color: $background;
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 16px;
+
+      &:focus {
+        outline: 2px solid black;
+      }
+    }
+
+    input.error {
+      outline: 1px solid red;
+    }
+
+    // .loginForm__input_login
+    &_login {
+      margin-bottom: 40px;
+
+      label {
+        margin-bottom: 5px;
+      }
+    }
+
+    // .loginForm__input_password
+    &_password {
+      margin-bottom: 78px;
+    }
+  }
+
+  // .loginForm__submit
+  &__submit {
+    text-align: center;
+    margin-bottom: 47px;
+
+    button {
+      border: 2px solid #7C838A;
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 20px;
+      transition: background-color .4s ease .5s;
+
+      &:focus {
+        border: 2px solid black;
+        box-shadow: 0px 0px 2px 0px black inset;
+      }
+    }
+
+    button.error {
+      background-color: red;
+    }
+  }
+}
